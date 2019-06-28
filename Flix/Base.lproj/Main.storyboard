@@ -18,6 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="B4y-vH-OeO" kind="relationship" relationship="viewControllers" id="B6c-lU-vrG"/>
@@ -32,10 +33,16 @@
         <scene sceneID="sPp-1R-Nch">
             <objects>
                 <navigationController id="U6i-mj-Vlq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Posters" id="aAd-cl-G73"/>
+                    <tabBarItem key="tabBarItem" title="Posters" image="superhero_tabbar_item" id="aAd-cl-G73"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NcV-WK-Jsb">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="D1O-D8-ttT" kind="relationship" relationship="rootViewController" id="joZ-Dl-hT3"/>
@@ -45,7 +52,7 @@
             </objects>
             <point key="canvasLocation" x="2588" y="-1675"/>
         </scene>
-        <!--Movies Grid View Controller-->
+        <!--Movies-->
         <scene sceneID="MyT-jL-cLl">
             <objects>
                 <viewController id="D1O-D8-ttT" customClass="MoviesGridViewController" sceneMemberID="viewController">
@@ -89,7 +96,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8UY-lX-H53"/>
                     </view>
-                    <navigationItem key="navigationItem" id="m4g-Sw-LF0"/>
+                    <navigationItem key="navigationItem" title="Movies" id="m4g-Sw-LF0"/>
                     <connections>
                         <outlet property="collectionView" destination="vra-LR-ybm" id="E3v-ZZ-8zZ"/>
                     </connections>
@@ -110,9 +117,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="rOk-GW-wQ5">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="145" id="4Zp-Ag-UQ0" customClass="MovieCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="145"/>
+                                        <rect key="frame" x="0.0" y="72" width="375" height="145"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Zp-Ag-UQ0" id="vzV-LF-9Gn">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="144.5"/>
@@ -155,6 +167,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="2G8-sb-PLU"/>
                     <connections>
+                        <outlet property="searchBar" destination="rOk-GW-wQ5" id="hCf-rK-BxO"/>
                         <outlet property="tableView" destination="m9r-Uw-i20" id="k87-su-bLc"/>
                     </connections>
                 </viewController>
@@ -217,11 +230,17 @@
         <scene sceneID="QVj-3X-jbx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="B4y-vH-OeO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Now Playing" id="8De-sy-WDs"/>
+                    <tabBarItem key="tabBarItem" title="Now Playing" image="now_playing_tabbar_item" id="8De-sy-WDs"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IoF-e6-fTQ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -233,7 +252,12 @@
             <point key="canvasLocation" x="102" y="-1615"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="now_playing_tabbar_item" width="21" height="21"/>
+        <image name="superhero_tabbar_item" width="21" height="23"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xlh-mI-bZz"/>
+        <segue reference="kQB-K4-V7n"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
