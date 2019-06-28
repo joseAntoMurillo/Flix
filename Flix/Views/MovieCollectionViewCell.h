@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MovieCollectionViewCell : UICollectionViewCell
 
+// For the control view, for each movie, only the poster is shown
 @property (weak, nonatomic) IBOutlet UIImageView *posterView;
 
 @end
