@@ -45,6 +45,20 @@
         if (error != nil) {
             NSLog(@"%@", [error localizedDescription]);
             
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot get movies" message:@"The internet connection appears to be offline" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            // OK action
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                }];
+            
+            // adding the OK action to the alert controller
+            [alert addAction:okAction];
+            
+            // Show the alert
+            [self presentViewController:alert animated:YES completion:^{
+            }];
+            
+            
         }
         else {
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
