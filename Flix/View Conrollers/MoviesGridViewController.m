@@ -96,28 +96,40 @@
     // Gets data of respective movie and saves it in the movie object
     NSDictionary *movie = self.movies[indexPath.item];
     
-    // Gets and sets poster image in control view cells
-    NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
-    NSString *fullPosterURLString = [baseURLString stringByAppendingString: movie[@"poster_path"]];
-    NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
+    NSString *fullLowPosterURLString = [@"https://image.tmdb.org/t/p/w45" stringByAppendingString: movie[@"poster_path"]];
+    NSString *fullHighPosterURLString = [@"https://image.tmdb.org/t/p/original" stringByAppendingString: movie[@"poster_path"]];
+    NSURL *lowURL = [NSURL URLWithString:fullLowPosterURLString];
+    NSURL *highURL = [NSURL URLWithString:fullHighPosterURLString];
+    NSURLRequest *requestSmall = [NSURLRequest requestWithURL: lowURL];
+    NSURLRequest *requestLarge = [NSURLRequest requestWithURL: highURL];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:posterURL];
-    
-    // Sets image from poster's URLrvkgructrjcntlgrutkjlftndhrbkbve
-    cell.posterView.image = nil;
-    [cell.posterView setImageWithURL:posterURL];
-    
-    // Uses animation to fade image as it downloads for 0.3
-    [cell.posterView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-        cell.posterView.alpha = 0.0;
-        cell.posterView.image = image;
+    // Code to first  put low-resolution image and then hihg-resolution one
+    [cell.posterView setImageWithURLRequest:requestSmall placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *smallImage) {
+         // smallI will be nil if the smallImage is already available
+         // in cache (might want to do something smarter in that case).
+         cell.posterView.alpha = 0.0;
+         cell.posterView.image = smallImage;
         
-        //Animate UIImageView back to alpha 1 over 0.3 seconds
-        [UIView animateWithDuration:0.3 animations:^{
+         [UIView animateWithDuration:0.3 animations:^{
             cell.posterView.alpha = 1.0;
-        }];
-    } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-    }];
+         }];
+        
+         // Fading animation for loading images in collection view
+         [UIView animateWithDuration:0.3 animations:^{
+               cell.posterView.alpha = 1.0;
+             
+         } completion:^(BOOL finished) {
+         // The AFNetworking ImageView Category only allows one request to be sent at a time
+         // per ImageView. This code must be in the completion block.
+             [cell.posterView setImageWithURLRequest:requestLarge placeholderImage:smallImage success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage * largeImage) {
+                 cell.posterView.image = largeImage;
+             }
+             failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+             }];
+         }];
+      }
+      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+      }];
 
     // Sets custom background color when selecting a cell
     UIColor *backColor = [UIColor colorWithRed:0.85 green:0.83 blue:0.83 alpha:1.0];
