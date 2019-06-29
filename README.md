@@ -50,7 +50,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 - Understanding all the pieces of the code
-- Getting used witht the different buttons and options at XCode
+- Getting used with the different buttons and options at XCode
+- Using Objective-C syntax; methods and so. I think this was the hardest challenge that I faced. 
+
 
 ## Credits
 
