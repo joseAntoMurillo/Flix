@@ -127,7 +127,18 @@
     cell.posterView.image = nil;
     [cell.posterView setImageWithURL:posterURL];
     
+    // Sets custom background color when selecting a cell
+    UIColor *backColor = [UIColor colorWithRed:0.85 green:0.83 blue:0.83 alpha:1.0];
+    UIView *backgroundView = [[UIView alloc] init];
+    backgroundView.backgroundColor = backColor;
+    cell.selectedBackgroundView = backgroundView;
+    
     return cell;
+}
+
+// Uses animation to deselect cell after selecting it
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 // Adds cancel button to search bar

@@ -100,10 +100,37 @@
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
     NSString *fullPosterURLString = [baseURLString stringByAppendingString: movie[@"poster_path"]];
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:posterURL];
+    
+    // Sets image from poster's URLrvkgructrjcntlgrutkjlftndhrbkbve
     cell.posterView.image = nil;
     [cell.posterView setImageWithURL:posterURL];
     
+    // Uses animation to fade image as it downloads for 0.3
+    [cell.posterView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+        cell.posterView.alpha = 0.0;
+        cell.posterView.image = image;
+        
+        //Animate UIImageView back to alpha 1 over 0.3 seconds
+        [UIView animateWithDuration:0.3 animations:^{
+            cell.posterView.alpha = 1.0;
+        }];
+    } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+    }];
+
+    // Sets custom background color when selecting a cell
+    UIColor *backColor = [UIColor colorWithRed:0.85 green:0.83 blue:0.83 alpha:1.0];
+    UIView *backgroundView = [[UIView alloc] init];
+    backgroundView.backgroundColor = backColor;
+    cell.selectedBackgroundView = backgroundView;
+    
     return cell;
+}
+
+// Uses animation to deselect cell after selecting it
+- (void)collectionView:(UICollectionView *)collectionView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 }
 
 // Cells in control view are determined by the number of family-type movies
